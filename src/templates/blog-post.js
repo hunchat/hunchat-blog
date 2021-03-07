@@ -39,35 +39,48 @@ export default BlogPostTemplate
 
 export const pageQuery = graphql`
   query BlogPostBySlug(
-    $slug: String!
+    $id: String!
+    $previousPostId: String
+    $nextPostId: String
   ) {
     site {
       siteMetadata {
         title
       }
     }
-    markdownRemark(fields: { slug: { eq: $slug } }) {
+    markdownRemark(id: { eq: $id }) {
       id
       excerpt(pruneLength: 160)
       html
+      frontmatter {
+        title
+        author {
+          name
+          bio
+          image {
+            childImageSharp {
+              gatsbyImageData(width: 70)
+            }
+          }
+        }
+        date(formatString: "MMMM DD, YYYY")
+        description
+      }
+    }
+    previous: markdownRemark(id: { eq: $previousPostId }) {
       fields {
         slug
       }
       frontmatter {
         title
-        author {
-          id
-          name
-          bio
-          profileImage {
-            childImageSharp {
-              fluid {
-                ...GatsbyImageSharpFluid
-              }
-            }
-          }
-        }
-        date
+      }
+    }
+    next: markdownRemark(id: { eq: $nextPostId }) {
+      fields {
+        slug
+      }
+      frontmatter {
+        title
       }
     }
   }

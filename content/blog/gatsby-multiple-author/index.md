@@ -5,7 +5,7 @@ date: "2021-03-07T21:00:00.000Z"
 description: "Adding `gatsby-starter-blog` support for multiple authors."
 ---
 
-We've been talking about starting a blog for Hunchat for a while. The first solution that came to mind was to start a [Medium](https://medium.com) publication, but we wanted to host it at (https://blog.hunchat.com) and Medium only supports custom domain for member, costing 5$ a month. Since we are just starting we don't want to accumulate unnecessary costs, so we kept looking for a free alternative. I immediately thought of [Gatsby](https://www.gatsbyjs.com) and fortunately they [gatsby-starter-blog](https://github.com/gatsbyjs/gatsby-starter-blog), which is a great blog starter.
+We've been talking about starting a blog for Hunchat for a while. The first solution that came to mind was to start a [Medium](https://medium.com) publication, but we wanted to host it at https://blog.hunchat.com and Medium only supports custom domain for members, costing 5$/month. Since we are just starting we don't want to accumulate unnecessary costs, so we kept looking for a free alternative. I immediately thought of [Gatsby](https://www.gatsbyjs.com) and fortunately there is [gatsby-starter-blog](https://github.com/gatsbyjs/gatsby-starter-blog), which is a great blog starter.
 
 Now, `gatsby-starter-blog` comes with support for a single author, and since we want a blog for the whole company we need to add support for multiple authors. In this blog I'll explain how I did this. I'll be following [How to support multiple authors in Gatsby.js](https://nosleepjavascript.com/gatsby-multi-author/), with minor differences.
 
@@ -23,8 +23,8 @@ gatsby develop
 
 Your site is now running at `http://localhost:8000`!
 
-This starter comes with 3 example blogs, located at `content/blog`. Let's add an author to the Hello World blog. We will specify an author id
-```content/blog/hello-world/index.md
+This starter comes with 3 example blogs, located at `content/blog`. Let's add an author to the Hello World blog. We will do this by specifying an author id.
+```markdown:title=content/blog/hello-world/index.md
 ---
 title: Hello World
 author: ernesto
@@ -32,12 +32,12 @@ date: "2015-05-01T22:12:03.284Z"
 description: "Hello World"
 ---
 ```
-Now we have to setup Gatsby so that frontmatter is able to use this author entry and create a relation to an `author` node with id `ernesto`. We'll accomplish this by doing:
+Now we have to setup Gatsby so that `frontmatter` is able to use this author entry and create a relation to an `author` node with id `ernesto`. We'll accomplish this by doing:
 - use the filesystem as a valid source of data. In this case we used `src/data` but it can be anything you like.
 - use the filesystem as a valid source of assets. We'll use `content/assets` to store author images.
 - use a yaml transformer because we will store our authors data inside a yaml.
 - map frontmatter’s author attribute to `src/data/author.yaml`.
-```gatsby-config.js
+```javascript:title=gatsby-config.js
 ---
 module.exports = {
   plugins: [
@@ -74,7 +74,7 @@ npm install gatsby-transformer-yaml
 ```
 
 This starter comes with support for a single author. We won't be using it so let's remove it from the `siteMetadata`. We'll have to edit the configs and schema.
-```gatsby-config.js
+```javascript:title=gatsby-config.js
 ...
 siteMetadata: {
   title: `Hunchat Blog`,
@@ -110,7 +110,7 @@ createTypes(`
 We also removed social, but you can keep it if you want.
 
 Next create the author data. Create a `src/data/author.yaml` file and add you author entries
-```src/data/author.yaml
+```yaml:title=src/data/author.yaml
 - id: ernesto
   name: Ernesto González
   bio: Cofounder
@@ -119,7 +119,7 @@ Next create the author data. Create a `src/data/author.yaml` file and add you au
 and don't forget to create the add the image file at `content/assets/ernesto-image.jpg`.
 
 Now all we have to edit is the `pageQuery` and send the `author` as a props to `Bio`.
-```src/templates/blog-post.js
+```javascript:title=src/templates/blog-post.js
 import * as React from "react"
 import { graphql } from "gatsby"
 
@@ -208,7 +208,8 @@ export const pageQuery = graphql`
   }
 `
 ```
-```src/components/bio.js
+
+```javascript:title=src/components/bio.js
 import * as React from "react"
 import { GatsbyImage, getImage } from "gatsby-plugin-image"
 
@@ -240,3 +241,5 @@ const Bio = ({ author = {} }) => {
 
 export default Bio
 ```
+
+That's it. Now you can create other authors and blog posts and assign authors to it.

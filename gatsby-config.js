@@ -1,7 +1,7 @@
 module.exports = {
   siteMetadata: {
     title: `Hunchat Blog`,
-    description: `News, stories and updates on Hunchat.`,
+    description: `News, stories and updates on the development of Hunchat.`,
     siteUrl: `https://blog.hunchat.com/`,
     image: `/images/social_sharing_image.png`,
     twitterUsername: `gethunchat`

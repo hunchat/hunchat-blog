@@ -32,11 +32,11 @@ date: "2015-05-01T22:12:03.284Z"
 description: "Hello World"
 ---
 ```
-Now we have to setup Gatsby so that `frontmatter` is able to use this author entry and create a relation to an `author` node with id `ernesto`. We'll accomplish this by doing:
-- use the filesystem as a valid source of data. In this case we used `src/data` but it can be anything you like.
-- use the filesystem as a valid source of assets. We'll use `content/assets` to store author images.
-- use a yaml transformer because we will store our authors data inside a yaml.
-- map frontmatter’s author attribute to `src/data/author.yaml`.
+Now we have to setup Gatsby so that `frontmatter` is able to use this author entry and create a relation to an `author` node with id `ernesto`. We'll accomplish this by:
+- using the filesystem as a valid source of data. In this case we used `src/data` but it can be anything you like.
+- using the filesystem as a valid source of assets. We'll use `content/assets` to store author images.
+- using a yaml transformer because we will store our authors data inside a yaml.
+- mapping frontmatter’s author attribute to `src/data/author.yaml`.
 ```javascript:title=gatsby-config.js
 ---
 module.exports = {

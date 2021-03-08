@@ -3,6 +3,8 @@ module.exports = {
     title: `Hunchat Blog`,
     description: `News, stories and updates on Hunchat.`,
     siteUrl: `https://blog.hunchat.com/`,
+    image: `/images/social_sharing_image.png`,
+    twitterUsername: `gethunchat`
   },
   plugins: [
     `gatsby-plugin-image`,

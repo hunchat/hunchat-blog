@@ -2,7 +2,7 @@
 title: Gatsby blog with multiple authors
 author: ernesto
 date: "2021-03-07T21:00:00.000Z"
-description: "Adding `gatsby-starter-blog` support for multiple authors."
+description: Adding gatsby-starter-blog support for multiple authors.
 ---
 
 We've been talking about starting a blog for Hunchat for a while. The first solution that came to mind was to start a [Medium](https://medium.com) publication, but we wanted to host it at https://blog.hunchat.com and Medium only supports custom domain for members, costing 5$/month. Since we are just starting we don't want to accumulate unnecessary costs, so we kept looking for a free alternative. I immediately thought of [Gatsby](https://www.gatsbyjs.com) and fortunately there is [gatsby-starter-blog](https://github.com/gatsbyjs/gatsby-starter-blog), which is a great blog starter.

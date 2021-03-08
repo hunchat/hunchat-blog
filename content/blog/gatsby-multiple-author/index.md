@@ -83,7 +83,7 @@ siteMetadata: {
 },
 ...
 ```
-```gatsby-node.js
+```javascript:title=gatsby-node.js
 ...
 createTypes(`
   type SiteSiteMetadata {

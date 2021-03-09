@@ -31,7 +31,7 @@ const SEO = ({ description, url, lang, meta, title, image, twitterUsername }) =>
   const metaUrl = url || site.siteMetadata.siteUrl
   const defaultTitle = site.siteMetadata?.title
   const metaImage = image || site.siteMetadata.image
-  const metaTwitterCreator = twitterUsername || site.siteMetadata.twitterUsername
+  const metaTwitterSite = twitterUsername || site.siteMetadata.twitterUsername
 
   return (
     <Helmet
@@ -86,8 +86,8 @@ const SEO = ({ description, url, lang, meta, title, image, twitterUsername }) =>
           content: metaImage,
         },
         {
-          name: `twitter:creator`,
-          content: metaTwitterCreator,
+          name: `twitter:site`,
+          content: metaTwitterSite,
         },
       ].concat(meta)}
     />

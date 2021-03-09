@@ -83,7 +83,7 @@ const SEO = ({ description, url, lang, meta, title, image, twitterUsername }) =>
         },
         {
           property: `twitter:image`,
-          content: metaImage,
+          content: metaUrl + metaImage,
         },
         {
           name: `twitter:site`,

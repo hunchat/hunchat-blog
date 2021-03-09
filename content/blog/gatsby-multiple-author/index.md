@@ -109,16 +109,108 @@ createTypes(`
 ```
 We also removed social, but you can keep it if you want.
 
-Next create the author data. Create a `src/data/author.yaml` file and add you author entries
+Next create the author data. Create a `src/data/author.yaml` file and add your author entries
 ```yaml:title=src/data/author.yaml
 - id: ernesto
   name: Ernesto González
   bio: Cofounder
   image: ../../content/assets/ernesto-image.jpg
 ```
-and don't forget to create the add the image file at `content/assets/ernesto-image.jpg`.
+Don't forget to add the image file at `content/assets/ernesto-image.jpg`.
 
-Now all we have to edit is the `pageQuery` and send the `author` as a props to `Bio`.
+Since the website doesn't have a single author, remove the `Bio` from `src/pages/index.js`.
+```javascript:title=src/pages/index.js
+import * as React from "react"
+import { Link, graphql } from "gatsby"
+
+import Layout from "../components/layout"
+import SEO from "../components/seo"
+
+const BlogIndex = ({ data, location }) => {
+  const siteTitle = data.site.siteMetadata?.title || `Title`
+  const siteDescription = data.site.siteMetadata?.description || `Description`
+  const posts = data.allMarkdownRemark.nodes
+
+  if (posts.length === 0) {
+    return (
+      <Layout location={location} title={siteTitle} description={siteDescription}>
+        <SEO title="All posts" />
+        <p>
+          No blog posts found. Add markdown posts to "content/blog" (or the
+          directory you specified for the "gatsby-source-filesystem" plugin in
+          gatsby-config.js).
+        </p>
+      </Layout>
+    )
+  }
+
+  return (
+    <Layout location={location} title={siteTitle} description={siteDescription}>
+      <SEO title="All posts" />
+      <ol style={{ listStyle: `none` }}>
+        {posts.map(post => {
+          const title = post.frontmatter.title || post.fields.slug
+
+          return (
+            <li key={post.fields.slug}>
+              <article
+                className="post-list-item"
+                itemScope
+                itemType="http://schema.org/Article"
+              >
+                <header>
+                  <h2>
+                    <Link to={post.fields.slug} itemProp="url">
+                      <span itemProp="headline">{title}</span>
+                    </Link>
+                  </h2>
+                  <small>{post.frontmatter.date}</small>
+                </header>
+                <section>
+                  <p
+                    dangerouslySetInnerHTML={{
+                      __html: post.frontmatter.description || post.excerpt,
+                    }}
+                    itemProp="description"
+                  />
+                </section>
+              </article>
+            </li>
+          )
+        })}
+      </ol>
+    </Layout>
+  )
+}
+
+export default BlogIndex
+
+export const pageQuery = graphql`
+  query {
+    site {
+      siteMetadata {
+        title
+        description
+      }
+    }
+    allMarkdownRemark(sort: { fields: [frontmatter___date], order: DESC }) {
+      nodes {
+        excerpt
+        fields {
+          slug
+        }
+        frontmatter {
+          date(formatString: "MMMM DD, YYYY")
+          title
+          description
+        }
+      }
+    }
+  }
+`
+```
+
+Now we will modify the `pageQuery` on `src/templates/blog-post.js` to retrieve the post `author` and set it as a props on `Bio`.
 ```javascript:title=src/templates/blog-post.js
 import * as React from "react"
 import { graphql } from "gatsby"
@@ -209,6 +301,7 @@ export const pageQuery = graphql`
 `
 ```
 
+And finally we use the `author` props on `Bio` to fill the data.
 ```javascript:title=src/components/bio.js
 import * as React from "react"
 import { GatsbyImage, getImage } from "gatsby-plugin-image"
@@ -242,4 +335,4 @@ const Bio = ({ author = {} }) => {
 export default Bio
 ```
 
-That's it. Now you can create other authors and blog posts and assign authors to it.
+That's it. Now you can create other authors and blog posts and assign authors to them.

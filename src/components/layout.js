@@ -16,17 +16,29 @@ const Layout = ({ location, title, description, children }) => {
           {description}
         </h2>
         <div className="link-heading">
-          <Link to="https://hunchat.com">Main website</Link>
+          <Link to="https://hunchat.com/?utm_source=blog.hunchat&utm_medium=blog&utm_campaign=landing_page">Main website</Link>
           |
           <Link to="https://twitter.com/gethunchat">Twitter</Link>
         </div>
       </header>
     )
   } else {
+    let utmCampaign = location.pathname.replaceAll('/', '').replaceAll('-', '_')
+    let linkToMainWebsite = `https://hunchat.com/?utm_source=blog.hunchat&utm_medium=blog&utm_campaign=${utmCampaign}`
     header = (
-      <Link className="header-link-home" to="/">
-        {title}
-      </Link>
+      <header className="global-header">
+        <h2 className="main-heading">
+          <Link to="/">{title}</Link>
+        </h2>
+        <h2 className="secondary-heading">
+          {description}
+        </h2>
+        <div className="link-heading">
+          <Link to={linkToMainWebsite}>Main website</Link>
+          |
+          <Link to="https://twitter.com/gethunchat">Twitter</Link>
+        </div>
+      </header>
     )
   }
 

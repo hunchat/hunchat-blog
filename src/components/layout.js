@@ -23,7 +23,7 @@ const Layout = ({ location, title, description, children }) => {
       </header>
     )
   } else {
-    let utmCampaign = location.pathname.replaceAll('/', '').replaceAll('-', '_')
+    let utmCampaign = location.pathname.replace(/\//g, '').replace(/-/g, '_')
     let linkToMainWebsite = `https://hunchat.com/?utm_source=blog.hunchat&utm_medium=blog&utm_campaign=${utmCampaign}`
     header = (
       <header className="global-header">

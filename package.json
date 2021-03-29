@@ -1,11 +1,11 @@
 {
-  "name": "gatsby-starter-blog",
+  "name": "hunchat-blog",
   "private": true,
-  "description": "A starter for a blog powered by Gatsby and Markdown",
+  "description": "Hunchat blog publication",
   "version": "0.1.0",
-  "author": "Kyle Mathews <mathews.kyle@gmail.com>",
+  "author": "Hunchat Lda",
   "bugs": {
-    "url": "https://github.com/gatsbyjs/gatsby/issues"
+    "url": "https://github.com/hunchat/hunchat-blog/issues"
   },
   "dependencies": {
     "gatsby": "^3.0.1",
@@ -47,7 +47,7 @@
   "main": "n/a",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/gatsbyjs/gatsby-starter-blog.git"
+    "url": "git+https://github.com/hunchat/hunchat-blog.git"
   },
   "scripts": {
     "build": "gatsby build",

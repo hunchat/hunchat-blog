@@ -1,5 +1,5 @@
 ---
-title: Engineering: week of 2th-8th January 2022
+title: Engineering: week of 2nd-8th January 2022
 author: ernesto
 date: "2022-01-11T05:00:00.000Z"
 description: Modularization for the win.

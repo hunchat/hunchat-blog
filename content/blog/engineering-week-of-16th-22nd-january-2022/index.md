@@ -1,5 +1,5 @@
 ---
-title: Engineering: week of 16th-22nd January 2022
+title: Engineering — week of 16th-22nd January 2022
 author: ernesto
 date: "2022-01-24T04:00:00.000Z"
 description: Need for Speed.
@@ -98,9 +98,11 @@ This proved to be a hard task, because we depended on a lot of nested serializer
 Now, if there were a way to reduce the number of posts per feed, serialization wouldn't be a burden. I remembered applying pagination was quite easy in Django Rest Framework from a previous project, so I gave that a try. I applied cursor pagination for 10-posts pages to my development environment and managed to reduce latency by 98% in a feed with 40k posts — I wanted to exaggerate the size to see the effects clearly.
 
 ![Home feed before pagination](./before-pagination.mp4)
+
 _Home feed before pagination_
 
 ![Home feed after pagination](./after-pagination.mp4)
+
 _Home feed after pagination_
 
 Once I did this for the home feed it was a matter of replicating it for the explore feed and notifications inbox.
